@@ -10,10 +10,11 @@ bool off_by_one(const string& longer, const string& shorter){
 	for(int i=0; i<short_len; ++i)
 		if(shorter[i] != longer[i+found_diff]){
 			++found_diff;
+			--i;
 			if(found_diff > 1)
 				return false;
 		}
-	return found_diff;
+	return true;
 }
 bool edit_distance_within(const std::string& str1, const std::string& str2, int d){
 	int diff = str1.length() - str2.length();
@@ -30,7 +31,7 @@ bool edit_distance_within(const std::string& str1, const std::string& str2, int 
 		return !same;
 	}else if(diff == d)
 		return off_by_one(str1, str2);
-	else if(diff == d)
+	else if(diff == -d)
 		return off_by_one(str2, str1);
 	return false;
 }
@@ -82,13 +83,22 @@ void verify_word_ladder() {
     // my_assert(generate_word_ladder("work", "play", word_list).size() == 6);
     // my_assert(generate_word_ladder("sleep", "awake", word_list).size() == 8);
     // my_assert(generate_word_ladder("car", "cheat", word_list).size() == 4);
-	vector<string> ladder1 = generate_word_ladder("work", "play", word_list);
-	print_word_ladder(ladder1);
-	vector<string> ladder2 = generate_word_ladder("wleep", "awake", word_list);
-	print_word_ladder(ladder2);
-	vector<string> ladder3 = generate_word_ladder("car", "cheat", word_list);
-	print_word_ladder(ladder3);
-	// cout << "Instead got: " << generate_word_ladder("work", "play", word_list).size() << endl;
-	// cout << "Instead got: " << generate_word_ladder("sleep", "awake", word_list).size() << endl;
-	// cout << "Instead got: " << generate_word_ladder("car", "cheat", word_list).size() << endl;
+	vector<string> ladder1 = generate_word_ladder("cat", "dog", word_list);
+	print_word_ladder(ladder1); cout << endl;
+	my_assert(ladder1.size() == 4);
+	vector<string> ladder2 = generate_word_ladder("marty", "curls", word_list);
+	print_word_ladder(ladder2); cout << endl;
+	my_assert(ladder2.size() == 6);
+	vector<string> ladder3 = generate_word_ladder("code", "data", word_list);
+	print_word_ladder(ladder3); cout << endl;
+	my_assert(ladder3.size() == 6);
+	vector<string> ladder4 = generate_word_ladder("work", "play", word_list);
+	print_word_ladder(ladder4); cout << endl;
+	my_assert(ladder4.size() == 6);
+	vector<string> ladder5 = generate_word_ladder("sleep", "awake", word_list);
+	print_word_ladder(ladder5); cout << endl;
+	my_assert(ladder5.size() == 8);
+	vector<string> ladder6 = generate_word_ladder("car", "cheat", word_list);
+	print_word_ladder(ladder6); cout << endl;
+	my_assert(ladder6.size() == 4);
 }
