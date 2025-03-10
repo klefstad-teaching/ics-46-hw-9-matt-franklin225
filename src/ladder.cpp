@@ -28,7 +28,7 @@ bool edit_distance_within(const std::string& str1, const std::string& str2, int 
 				else
 					return false;
 			}
-		return !same;
+		return true;
 	}else if(diff == d)
 		return off_by_one(str1, str2);
 	else if(diff == -d)
@@ -69,8 +69,12 @@ void load_words(set<string> & word_list, const string& file_name){
 		word_list.insert(word);
 }
 void print_word_ladder(const vector<string>& ladder){
-	for(string word: ladder)
-		cout << word << " ";
+	if(ladder.size() == 0)
+		cout << "No word ladder found.";
+	else
+		for(string word: ladder)
+			cout << word << " ";
+	cout << endl;
 }
 
 #define my_assert(e) {cout << #e << ((e) ? " passed": " failed") << endl;}
