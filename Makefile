@@ -1,8 +1,8 @@
 CXX = g++
 CXXFLAGS = -std=c++20 -Wall -Wextra -Werror -Wfatal-errors -pedantic
-SRCS = src/ladder_main.cpp src/ladder.cpp
+SRCS = src/dijkstras_main.cpp src/dijkstras.cpp
 OBJS = $(SRCS:.cpp=.o)
-TARGET = ladder_main
+TARGET = main
 
 all: $(TARGET)
 
