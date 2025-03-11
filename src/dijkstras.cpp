@@ -7,6 +7,9 @@ struct Node{
 	bool operator<(const Node& other) const{
 		return weight < other.weight;
 	}
+	bool operator>(const Node& other) const{
+		return weight > other.weight;
+	}
 };
 
 vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& previous){
@@ -15,17 +18,21 @@ vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& prev
 	vector<int> distances = vector<int>(G.numVertices, numeric_limits<int>::max());
 	distances[source] = 0;
 
-	priority_queue<Node> pq;
+	priority_queue<Node, vector<Node>, greater<Node>> pq;
 	pq.push(Node(source, 0));
 	
 	while(!pq.empty()){
 		int u = pq.top().vertex;
+		cout << "Now testing: " << u << endl;
 		pq.pop();
 		if(visited[u]) { continue; }
 		visited[u] = true;
 		for(Edge e: G[u]){
 			int v = e.dst;
 			int weight = e.weight;
+			// if (!visited[v]){
+				cout << "Possible dist to " << v << ": " << distances[u] + weight << endl;
+			// }
 			if (!visited[v] && distances[u] + weight < distances[v]){
 				distances[v] = distances[u] + weight;
 				previous[v] = u;
