@@ -34,7 +34,7 @@ vector<int> dijkstra_shortest_path(const Graph& G, int source, vector<int>& prev
 		}
 	}
 
-	return previous;
+	return distances;
 }
 vector<int> extract_shortest_path(const vector<int>& distances, const vector<int>& previous, int destination){
 	cout << distances.size() << previous.size() << destination;
